@@ -2,9 +2,9 @@ import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
 
-import uploadConfig from '../config/upload';
-import AppError from '../errors/AppError';
-import User from '../models/User';
+import uploadConfig from '@config/upload';
+import AppError from '@shared/errors/AppError';
+import User from '../infra/typeorm/entities/User';
 
 interface Request {
   user_id: string;
@@ -12,7 +12,7 @@ interface Request {
 }
 
 export default class UpdateUserAvatarService {
-  public async run({ user_id, avatarFilename }: Request): Promise<User>{
+  public async run({ user_id, avatarFilename }: Request): Promise<User> {
     const userRepository = getRepository(User);
 
     const user = await userRepository.findOne(user_id);
@@ -35,6 +35,5 @@ export default class UpdateUserAvatarService {
     await userRepository.save(user);
 
     return user;
-
   }
 }
