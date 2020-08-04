@@ -8,3 +8,4 @@ tmp/*
 !tmp/.gitkeep
 
 README.md
+yarn-error.log
